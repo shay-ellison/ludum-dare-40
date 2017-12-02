@@ -8,6 +8,9 @@ public class BeeController : MonoBehaviour {
     public Rigidbody2D beeRigidbody;
 
     public float gravityScale = 0.25f;
+    private float fatGravityScale = 1.5f;
+    private float obeseGravityScale = 2f;
+
     public float flyForce = 5.0f;
     public float flyTime = 0.05f;
 
@@ -15,13 +18,17 @@ public class BeeController : MonoBehaviour {
     private float minDistanceFromTop = 1.0f;
     // private float screenQuadWidth;
 
+    // Position/Collision Controls - TODO: whole system could be better :) -- Flags
     public bool flying = false;
     public bool onGround = false;
+    public bool onPlatform = false;
     public bool treeCollision = false;
+    public bool jumping = false;
 
     private float bounceForceGoal = 0.0f;
 
     private Vector3 worldTop;
+    private Vector2 jumpVelocity;
 
     public void Bounce(float bounceForce) {
         bounceForceGoal += bounceForce;
@@ -49,11 +56,106 @@ public class BeeController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        switch (bee.getCurrentBodyState())
+        {
+            case Bee.BodyState.Fat:
+               UpdateFat();
+                break;
+            case Bee.BodyState.Obese:
+                UpdateObese();
+                break;
+            default:
+                break;
+        }
+    }
 
+    private void UpdateFat()
+    {
+        float jumpHeight = 2.0f;
+        float moveSpeed = 0.1f;
+        float horizontalX = 0.0f;
+
+        if (Input.GetKey(KeyCode.RightArrow))  // Move right
+        {
+            horizontalX = moveSpeed;
+            LookRight();
+        } else if (Input.GetKey(KeyCode.LeftArrow))  // Move left
+        {
+            horizontalX = -moveSpeed;
+            LookLeft();
+        }
+
+        if (Input.GetKey(KeyCode.Space))  // Jump, now
+        {
+            if (onGround || onPlatform)
+            {
+                Vector2 jumpVector = new Vector2(0, jumpHeight);
+                beeRigidbody.position += jumpVector;
+
+                onGround = false;
+                onPlatform = false;
+                jumping = true;
+            }
+        }
+
+        // Move
+        if (!treeCollision && (jumping || onGround || onPlatform))
+        {
+            Vector2 horizontalVector = new Vector2(horizontalX, 0);
+            beeRigidbody.position += horizontalVector;
+        }
+
+        if (onGround || onPlatform)
+        {
+            jumping = false;
+        }
+    }
+
+    private void UpdateObese()
+    {
+        float jumpHeight = 2.0f;
+        float moveSpeed = 0.05f;
+        float horizontalX = 0.0f;
+
+        if (Input.GetKey(KeyCode.RightArrow))  // Move right
+        {
+            horizontalX = moveSpeed;
+            LookRight();
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))  // Move left
+        {
+            horizontalX = -moveSpeed;
+            LookLeft();
+        }
+
+        if (Input.GetKey(KeyCode.Space))  // Jump, now
+        {
+            if (onPlatform)  // Can only Jump on platform if obese
+            {
+                Vector2 jumpVector = new Vector2(0, jumpHeight);
+                beeRigidbody.position += jumpVector;
+
+                onGround = false;
+                onPlatform = false;
+                jumping = true;
+            }
+        }
+
+        // Move
+        if (!treeCollision && (jumping || onGround || onPlatform))
+        {
+            Vector2 horizontalVector = new Vector2(horizontalX, 0);
+            beeRigidbody.position += horizontalVector;
+        }
+
+        if (onGround || onPlatform)
+        {
+            jumping = false;
+        }
     }
 
     void FixedUpdate() {
-        
+        // Standard Gravity Force
         float gravityForce = Physics2D.gravity.y * gravityScale * Time.fixedDeltaTime;
 
         switch (bee.getCurrentBodyState())
@@ -62,28 +164,14 @@ public class BeeController : MonoBehaviour {
                 FixedUpdateNormal(gravityForce);
                 break;
             case Bee.BodyState.Fat:
-                FixedUpdateNormal(gravityForce);
+                FixedUpdateFat(gravityForce);
                 break;
             case Bee.BodyState.Obese:
-                FixedUpdateNormal(gravityForce);
+                FixedUpdateObese(gravityForce);
                 break;
             default:
                 break;
         }
-
-        // Debug.Log(Physics2D.gravity.y);
-        // Debug.Log(gravityForce);
-
-        /*
-          if (Input.GetButtonDown("Dash"))
-            {
-                Debug.Log("Dash");
-                _velocity += Vector3.Scale(transform.forward, 
-                                           DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * Drag.x + 1)) / -Time.deltaTime), 
-                                                                      0, 
-                                                                      (Mathf.Log(1f / (Time.deltaTime * Drag.z + 1)) / -Time.deltaTime)));
-            }
-         */
     }
 
     private void FixedUpdateNormal(float gravityForce)
@@ -113,26 +201,22 @@ public class BeeController : MonoBehaviour {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             horizontalMoveForce = -3.0f * Time.fixedDeltaTime;
-            transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);  // flip it left
+            LookLeft();
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             horizontalMoveForce = 3.0f * Time.fixedDeltaTime;
-            transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);  // flip it right
+            LookRight();
         }
 
         // Gravity
-        if (!onGround)
-        {
-            Vector2 gravityVector = new Vector2(Physics.gravity.x, gravityForce);
-            beeRigidbody.position += gravityVector;
-        }
+        ApplyGravity(gravityForce);
 
-        // Input Response
         // Fly
         Vector2 flyVector = new Vector2(0f, upForce);
         beeRigidbody.position += flyVector;
 
+        // Update Position Attributes as far as we know
         if (upForce > 0)
         {
             flying = true;
@@ -143,9 +227,9 @@ public class BeeController : MonoBehaviour {
             flying = false;
         }
 
+        // Move
         if (!onGround && !treeCollision)
         {
-            // Move
             Vector2 horizontalVector = new Vector2(horizontalMoveForce, 0f);
             beeRigidbody.position += horizontalVector;
         }
@@ -153,11 +237,36 @@ public class BeeController : MonoBehaviour {
 
     private void FixedUpdateFat(float gravityForce)
     {
+        // Only Gravity Happens here now
+        // gravityForce *= fatGravityScale;
+        ApplyGravity(gravityForce);
 
     }
 
     private void FixedUpdateObese(float gravityForce)
     {
+        // Only Gravity Happens here now
+        // gravityForce *= obeseGravityScale;
+        ApplyGravity(gravityForce);
+    }
 
+    private void ApplyGravity(float gravityForce)
+    {
+        // Gravity
+        if (!onGround && !onPlatform)
+        {
+            Vector2 gravityVector = new Vector2(Physics.gravity.x, gravityForce);
+            beeRigidbody.position += gravityVector;
+        }
+    }
+
+    private void LookLeft()
+    {
+        transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);  // flip it left
+    }
+
+    private void LookRight()
+    {
+        transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);  // flip it right
     }
 }
