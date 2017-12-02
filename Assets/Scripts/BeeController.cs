@@ -15,7 +15,13 @@ public class BeeController : MonoBehaviour {
 
     private bool flying = false;
 
+    private float bounceForceGoal = 0.0f;
+
     private Vector3 worldTop;
+
+    public void Bounce(float bounceForce) {
+        bounceForceGoal += bounceForce;
+    }
 
     // Use this for initialization
     void Start() {
@@ -34,11 +40,11 @@ public class BeeController : MonoBehaviour {
         Vector3 top = new Vector3(0f, Screen.height, 0f);
         worldTop = mainCamera.ScreenToWorldPoint(top);
     }
-	
-	// Update is called once per frame
-	void Update() {
-		
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     void FixedUpdate() {
         float upForce = 0.0f;
