@@ -21,6 +21,11 @@ public class Bee : MonoBehaviour {
     private SpriteRenderer beeRenderer;
     private BodyState currentBodyState;
 
+    public BodyState getCurrentBodyState()
+    {
+        return currentBodyState;
+    }
+
 	// Use this for initialization
 	void Start () {
         beeRenderer = GetComponent<SpriteRenderer>();
