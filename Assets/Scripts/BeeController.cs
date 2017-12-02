@@ -7,8 +7,8 @@ public class BeeController : MonoBehaviour {
     public Camera mainCamera;
     public Rigidbody2D beeRigidbody;
 
-    public float gravityScale = 1.0f;
-    public float flyForce = 10.0f;
+    public float gravityScale = 0.25f;
+    public float flyForce = 5.0f;
 
     private float minDistanceFromTop = 1.0f;
     private float screenQuadWidth;
