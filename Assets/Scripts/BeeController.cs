@@ -10,10 +10,11 @@ public class BeeController : MonoBehaviour {
     public float gravityScale = 0.25f;
     public float flyForce = 5.0f;
 
-    private float minDistanceFromTop = 1.0f;
+    private float minDistanceFromTop = 2.0f;
     private float screenQuadWidth;
 
-    private bool flying = false;
+    public bool flying = false;
+    public bool onGround = false;
 
     private float bounceForceGoal = 0.0f;
 
@@ -54,9 +55,7 @@ public class BeeController : MonoBehaviour {
         // Debug.Log(Physics2D.gravity.y);
         // Debug.Log(gravityForce);
 
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            flying = true;
-
+        if (Input.GetKey(KeyCode.Space)) {
             float distanceFromTop = worldTop.y - beeRigidbody.position.y;
             // Debug.Log("Distance: " + distanceFromTop.ToString());
             if (distanceFromTop <= minDistanceFromTop) {
@@ -65,8 +64,6 @@ public class BeeController : MonoBehaviour {
             } else {
                 upForce += flyForce * Time.deltaTime;
             }
-        } else {
-            flying = false;
         }
 
         // Debug.Log("UpForce = " + upForce.ToString());
@@ -80,16 +77,31 @@ public class BeeController : MonoBehaviour {
         }
 
         // Gravity
-        Vector2 gravityVector = new Vector2(Physics.gravity.x, gravityForce);
-        beeRigidbody.position += gravityVector;
+        if (!onGround)
+        {
+            Vector2 gravityVector = new Vector2(Physics.gravity.x, gravityForce);
+            beeRigidbody.position += gravityVector;
+        }
 
         // Input Response
         // Fly
         Vector2 flyVector = new Vector2(0f, upForce);
         beeRigidbody.position += flyVector;
 
-        // Move
-        Vector2 horizontalVector = new Vector2(horizontalMoveForce, 0f);
-        beeRigidbody.position += horizontalVector;
+        if (upForce > 0)
+        {
+            flying = true;
+            onGround = false;
+        } else
+        {
+            flying = false;
+        }
+
+        if (flying)
+        {
+            // Move
+            Vector2 horizontalVector = new Vector2(horizontalMoveForce, 0f);
+            beeRigidbody.position += horizontalVector;
+        }
     }
 }

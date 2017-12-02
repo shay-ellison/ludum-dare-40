@@ -19,6 +19,7 @@ public class BeeCollision : MonoBehaviour {
         if (otherGameObject.name == "Ground")
         {
             Debug.Log("Ground!");
+            beeController.onGround = true;
         }
         else if (otherGameObject.name == "Sunflower")  // Will basically do this for any flower
         {
