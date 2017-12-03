@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BeeController : MonoBehaviour {
 
@@ -35,14 +36,6 @@ public class BeeController : MonoBehaviour {
 
         beeRigidbody = GetComponent<Rigidbody2D>();
         bee = GetComponent<Bee>();
-
-        // Vector3 screenUpperCorner = new Vector3(Screen.width, Screen.height, 0f);
-        // Vector3 worldUpperCorner = mainCamera.ScreenToWorldPoint(screenUpperCorner);
-        // screenQuadWidth = worldUpperCorner.x;
-
-        //private Vector3 worldTop;
-        //Vector3 top = new Vector3(0f, Screen.height, 0f);
-        //worldTop = mainCamera.ScreenToWorldPoint(top);
     }
 
     // Update is called once per frame
@@ -133,6 +126,9 @@ public class BeeController : MonoBehaviour {
                 jumping = true;
                 onGround = false;
                 onPlatform = false;
+            } else if (onGround)
+            {
+                LoseGame();
             }
         }
 
@@ -223,5 +219,10 @@ public class BeeController : MonoBehaviour {
     {
         transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);  // flip it right
         // heading = 1;
+    }
+
+    private void LoseGame()
+    {
+        SceneManager.LoadScene("LoseScreen");
     }
 }
