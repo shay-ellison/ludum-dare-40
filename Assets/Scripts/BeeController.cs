@@ -8,6 +8,10 @@ public class BeeController : MonoBehaviour {
     private Rigidbody2D beeRigidbody;
     private SpriteRenderer beeSpriteRenderer;
 
+	//for bee sound effects
+	public AudioClip wingFX;
+	private AudioSource soundFX;
+
     private float flyForce = 1.0f;
 
     // Position/Collision Controls - TODO: whole system could be better :) -- Flags
@@ -22,7 +26,10 @@ public class BeeController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        if (mainCamera == null) {
+		//initialize soundFX
+		soundFX = GetComponent<AudioSource>();
+
+		if (mainCamera == null) {
             mainCamera = Camera.main;
         }
 
@@ -140,6 +147,15 @@ public class BeeController : MonoBehaviour {
     }
 
     void FixedUpdate() {
+		if (flying)
+		{
+			soundFX.PlayOneShot(wingFX, 5);
+		}
+		else
+		{
+			soundFX.Stop();
+		}
+
         switch (bee.getCurrentBodyState())
         {
             case Bee.BodyState.Normal:
