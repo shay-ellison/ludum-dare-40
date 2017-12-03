@@ -97,6 +97,7 @@ public class BeeController : MonoBehaviour {
     private void UpdateObese()
     {
         beeRigidbody.gravityScale = 0.25f;
+        float jumpHeight = 2.0f;
         float moveSpeed = 0.05f;
         float horizontalX = 0.0f;
 
@@ -115,7 +116,8 @@ public class BeeController : MonoBehaviour {
         {
             if (onPlatform)  // Can only Jump on platform if obese
             {
-                beeRigidbody.velocity = new Vector2(0, 0.8f);
+                Vector2 jumpVector = new Vector2(0, jumpHeight);
+                beeRigidbody.position += jumpVector;
 
                 onGround = false;
                 onPlatform = false;
@@ -155,11 +157,10 @@ public class BeeController : MonoBehaviour {
         {
             if (!flying)
             {
-                beeRigidbody.velocity = new Vector2(0.0f, 0.5f);
-            } else
-            {
-                upForce += flyForce * Time.fixedDeltaTime;
-            }            
+                beeRigidbody.velocity = new Vector2(0.0f, 0.25f);
+            }
+
+            upForce += flyForce * Time.fixedDeltaTime;            
 
             flying = true;
             onGround = false;  // might be on ground until you apply an upForce of some sort

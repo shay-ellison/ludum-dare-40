@@ -18,7 +18,6 @@ public class Bee : MonoBehaviour {
     public int pollenToFat = 5;
     public int pollenToObese = 8;
 
-    private SpriteRenderer beeRenderer;
     private BodyState currentBodyState;
 
     public BodyState getCurrentBodyState()
@@ -28,7 +27,6 @@ public class Bee : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        beeRenderer = GetComponent<SpriteRenderer>();
 		anim = GetComponent<Animator>();
 	}
 	
