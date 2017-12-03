@@ -16,6 +16,8 @@ public class BeeController : MonoBehaviour {
     public bool onPlatform = false;
     public bool jumping = false;
 
+    private float currentSpeed = 0.0f;
+
     private Bee bee;
 
     // Use this for initialization
@@ -58,17 +60,19 @@ public class BeeController : MonoBehaviour {
         beeRigidbody.gravityScale = 2.5f; 
         
         float jumpHeight = 12.0f;
-        float moveSpeed = 0.1f;
-        float horizontalX = 0.0f;
+        float movementSpeed = 0.075f;
 
         if (Input.GetKey(KeyCode.RightArrow))  // Move right
         {
-            horizontalX = moveSpeed;
+            currentSpeed = movementSpeed;
             LookRight();
         } else if (Input.GetKey(KeyCode.LeftArrow))  // Move left
         {
-            horizontalX = -moveSpeed;
+            currentSpeed = -movementSpeed;
             LookLeft();
+        } else
+        {
+            currentSpeed = 0.0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))  // Jump, now
@@ -84,7 +88,7 @@ public class BeeController : MonoBehaviour {
         }
 
         // Move
-        Vector2 horizontalVector = new Vector2(horizontalX, 0);
+        Vector2 horizontalVector = new Vector2(currentSpeed, 0);
         beeRigidbody.position += horizontalVector;
 
         if (onGround || onPlatform)
@@ -98,17 +102,19 @@ public class BeeController : MonoBehaviour {
         beeRigidbody.gravityScale = 2.5f;
         float jumpHeight = 12.0f;
         float moveSpeed = 0.05f;
-        float horizontalX = 0.0f;
 
         if (Input.GetKey(KeyCode.RightArrow))  // Move right
         {
-            horizontalX = moveSpeed;
+            currentSpeed = moveSpeed;
             LookRight();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))  // Move left
         {
-            horizontalX = -moveSpeed;
+            currentSpeed = -moveSpeed;
             LookLeft();
+        } else
+        {
+            currentSpeed = 0.0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))  // Jump, now
@@ -124,7 +130,7 @@ public class BeeController : MonoBehaviour {
         }
 
         // Move
-        Vector2 horizontalVector = new Vector2(horizontalX, 0);
+        Vector2 horizontalVector = new Vector2(currentSpeed, 0);
         beeRigidbody.position += horizontalVector;
 
         if (onGround || onPlatform)
@@ -147,6 +153,7 @@ public class BeeController : MonoBehaviour {
     private void FixedUpdateNormal()
     {
         float upForce = 0.0f;
+        float normalMovementSpeed = 3.0f;
         float horizontalMoveForce = 0.0f;
 
         if (Input.GetKey(KeyCode.Space))
@@ -172,12 +179,12 @@ public class BeeController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            horizontalMoveForce = -3.0f * Time.fixedDeltaTime;
+            horizontalMoveForce = -normalMovementSpeed * Time.fixedDeltaTime;
             LookLeft();
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            horizontalMoveForce = 3.0f * Time.fixedDeltaTime;
+            horizontalMoveForce = normalMovementSpeed * Time.fixedDeltaTime;
             LookRight();
         }
 
