@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 551685028df11fb47907bb29b1bef8af
-timeCreated: 1512196789
+timeCreated: 1512263922
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,7 @@ TextureImporter:
     21300004: FatBee_2
     21300006: FatBee_3
     21300008: FatBee_4
+  externalObjects: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -62,6 +63,7 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -70,6 +72,7 @@ TextureImporter:
     overridden: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -83,10 +86,10 @@ TextureImporter:
       name: FatBee_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 266
-        width: 124
-        height: 94
+        x: 0
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -97,10 +100,10 @@ TextureImporter:
       name: FatBee_1
       rect:
         serializedVersion: 2
-        x: 131
-        y: 266
-        width: 124
-        height: 87
+        x: 128
+        y: 256
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,10 +114,10 @@ TextureImporter:
       name: FatBee_2
       rect:
         serializedVersion: 2
-        x: 3
-        y: 138
-        width: 124
-        height: 80
+        x: 0
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,10 +128,10 @@ TextureImporter:
       name: FatBee_3
       rect:
         serializedVersion: 2
-        x: 131
-        y: 138
-        width: 124
-        height: 87
+        x: 128
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,10 +142,10 @@ TextureImporter:
       name: FatBee_4
       rect:
         serializedVersion: 2
-        x: 3
-        y: 10
-        width: 124
-        height: 94
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
