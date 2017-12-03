@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        bee = GameObject.Find("Bee");
+        bee = GameObject.FindGameObjectWithTag("Player");
 	}
 
     private void FixedUpdate()

@@ -14,8 +14,6 @@ public class BeeCollision : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         GameObject otherGameObject = other.gameObject;
 
-        // Debug.Log(otherGameObject.name);
-
         if (otherGameObject.tag == "Flower")  // NOTE: A REAL TRIGGER! =)
         {  // Will basically do this for any flower
             Flower flower = otherGameObject.GetComponent<Flower>();
@@ -27,7 +25,6 @@ public class BeeCollision : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D other)
     {
         GameObject otherGameObject = other.gameObject;
-
         if (otherGameObject.name == "Ground")
         {
             beeController.onGround = true;

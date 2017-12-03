@@ -5,9 +5,7 @@ using UnityEngine;
 public class Flower : MonoBehaviour {
 
     public int totalPollen = 10;
-    private int pollenPerGrab = 2;
-
-    public float bounceForce = 1.0f;
+    private int pollenPerGrab = 2;  // always 2?
 
     public int GimmePollen()
     {
