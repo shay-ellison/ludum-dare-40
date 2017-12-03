@@ -8,10 +8,6 @@ public class Bee : MonoBehaviour {
 	//Animation Variable
 	public Animator anim;
 
-    public Sprite normal;
-    public Sprite fat;
-    public Sprite obese;
-
     public enum BodyState { Normal, Fat, Obese };
     public GameObject pollenGoalDisplay;
     public GameObject pollenCollectedDisplay;
@@ -33,14 +29,11 @@ public class Bee : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         beeRenderer = GetComponent<SpriteRenderer>();
-
-		//get animator component
 		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
         UnityEngine.UI.Text goalText = pollenGoalDisplay.GetComponent<UnityEngine.UI.Text>();
         goalText.text = "Need: " + pollenGoal.ToString();
 
@@ -73,15 +66,12 @@ public class Bee : MonoBehaviour {
         {
             case BodyState.Normal:
                 currentBodyState = BodyState.Normal;
-				//beeRenderer.sprite = normal;
                 break;
             case BodyState.Fat:
                 currentBodyState = BodyState.Fat;
-				//beeRenderer.sprite = fat;
 				break;
             case BodyState.Obese:
                 currentBodyState = BodyState.Obese;
-				//beeRenderer.sprite = obese;
 				break;
             default:
                 break;

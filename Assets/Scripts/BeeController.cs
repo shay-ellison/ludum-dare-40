@@ -14,7 +14,7 @@ public class BeeController : MonoBehaviour {
     public float flyForce = 5.0f;  // needs to beat gravity, TODO: calculate based on gravity?
 
     private Bee bee;
-    private float minDistanceFromTop = 1.0f;
+    // private float minDistanceFromTop = 0.5f;
     // private float screenQuadWidth;
 
     // Position/Collision Controls - TODO: whole system could be better :) -- Flags
@@ -182,17 +182,17 @@ public class BeeController : MonoBehaviour {
         {
             float distanceFromTop = worldTop.y - beeRigidbody.position.y;
             // Debug.Log("Distance: " + distanceFromTop.ToString());
-            if (distanceFromTop <= minDistanceFromTop)
+            /*if (distanceFromTop <= minDistanceFromTop)
             {
                 // Debug.Log("Less than Distance " + minDistanceFromTop.ToString());
                 upForce = -gravityForce;  // enough to cancel gravity out
             }
             else
-            {
-                upForce += flyForce * Time.fixedDeltaTime;
+            {*/
+            upForce += flyForce * Time.fixedDeltaTime;
                 // upForce = Mathf.SmoothDamp()
                 // Mathf.Sqrt(JumpHeight * -2f * Gravity);
-            }
+            //}
         }
 
         // Debug.Log("UpForce = " + upForce.ToString());
