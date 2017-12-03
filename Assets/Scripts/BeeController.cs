@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BeeController : MonoBehaviour {
 
+    /*public class Direction
+    {
+        public int facing = 1;  // -1 (left), 0 (forward), 1 (right)
+        public int bearing = 0; // 0 (up), 1 (down), 2 (left), 3 (right) 
+    }*/
+
     public Camera mainCamera;
     public Rigidbody2D beeRigidbody;
 
@@ -16,18 +22,17 @@ public class BeeController : MonoBehaviour {
     private Bee bee;
     // private float minDistanceFromTop = 0.5f;
     // private float screenQuadWidth;
+    
 
     // Position/Collision Controls - TODO: whole system could be better :) -- Flags
     public bool flying = false;
     public bool onGround = false;
     public bool onPlatform = false;
-    public bool treeCollision = false;
     public bool jumping = false;
+    public bool treeCollision = false;
 
     private float bounceForceGoal = 0.0f;
-
     private Vector3 worldTop;
-    private Vector2 jumpVelocity;
 
     public void Bounce(float bounceForce) {
         bounceForceGoal += bounceForce;
@@ -249,6 +254,7 @@ public class BeeController : MonoBehaviour {
         ApplyGravity(gravityForce);
     }
 
+    /// Apply Gravity in a FixedUpdate
     private void ApplyGravity(float gravityForce)
     {
         // Gravity
@@ -262,10 +268,12 @@ public class BeeController : MonoBehaviour {
     private void LookLeft()
     {
         transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);  // flip it left
+        // heading = -1;
     }
 
     private void LookRight()
     {
         transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);  // flip it right
+        // heading = 1;
     }
 }
