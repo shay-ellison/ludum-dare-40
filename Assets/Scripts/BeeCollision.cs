@@ -16,20 +16,23 @@ public class BeeCollision : MonoBehaviour {
 
         // Debug.Log(otherGameObject.name);
 
-        if (otherGameObject.name == "Ground")
-        {
-            beeController.onGround = true;
-        }
-        else if (otherGameObject.tag == "Flower")
+        if (otherGameObject.tag == "Flower")  // NOTE: A REAL TRIGGER! =)
         {  // Will basically do this for any flower
             Flower flower = otherGameObject.GetComponent<Flower>();
             bee.pollenCollected += flower.GimmePollen();
             // beeController.Bounce(bounceForce);
         }
-        else if (otherGameObject.tag == "Tree")
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        GameObject otherGameObject = other.gameObject;
+
+        if (otherGameObject.name == "Ground")
         {
-            beeController.treeCollision = true;
-        } else if (otherGameObject.tag == "Leaf")
+            beeController.onGround = true;
+        }
+        else if (otherGameObject.tag == "Leaf")
         {
             beeController.onPlatform = true;
         }
@@ -38,10 +41,21 @@ public class BeeCollision : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D other)
     {
         GameObject otherGameObject = other.gameObject;
-        if (otherGameObject.tag == "Tree")
+        if (otherGameObject.tag == "Leaf")
         {
-            beeController.treeCollision = false;
-        } else if (otherGameObject.tag == "Leaf")
+            beeController.onPlatform = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        GameObject otherGameObject = other.gameObject;
+
+        if (otherGameObject.name == "Ground")
+        {
+            beeController.onGround = false;
+        }
+        else if (otherGameObject.tag == "Leaf")
         {
             beeController.onPlatform = false;
         }
