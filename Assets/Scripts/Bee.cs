@@ -4,6 +4,10 @@ using UnityEngine;
 // using UnityEngine.UI;
 
 public class Bee : MonoBehaviour {
+
+	//Animation Variable
+	public Animator anim;
+
     public Sprite normal;
     public Sprite fat;
     public Sprite obese;
@@ -29,6 +33,9 @@ public class Bee : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         beeRenderer = GetComponent<SpriteRenderer>();
+
+		//get animator component
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -66,18 +73,20 @@ public class Bee : MonoBehaviour {
         {
             case BodyState.Normal:
                 currentBodyState = BodyState.Normal;
-                beeRenderer.sprite = normal;
+				//beeRenderer.sprite = normal;
                 break;
             case BodyState.Fat:
                 currentBodyState = BodyState.Fat;
-                beeRenderer.sprite = fat;
-                break;
+				//beeRenderer.sprite = fat;
+				break;
             case BodyState.Obese:
                 currentBodyState = BodyState.Obese;
-                beeRenderer.sprite = obese;
-                break;
+				//beeRenderer.sprite = obese;
+				break;
             default:
                 break;
         }
-    }
+		//the unity gui has a check for the pollencollected to determine sprite
+		anim.SetFloat("pollenCollected", pollenCollected);
+	}
 }
