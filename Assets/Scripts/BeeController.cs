@@ -54,6 +54,7 @@ public class BeeController : MonoBehaviour {
 
     private void UpdateFat()
     {
+        // SmoothDamp the gravity on transition from Bee 
         beeRigidbody.gravityScale = 2.5f; 
         
         float jumpHeight = 12.0f;
@@ -150,7 +151,7 @@ public class BeeController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!flying)
+            if (!flying)  // initial burst when first hit space
             {
                 beeRigidbody.velocity = new Vector2(0.0f, 0.25f);
             }
