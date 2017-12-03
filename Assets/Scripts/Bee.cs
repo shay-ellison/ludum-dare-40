@@ -4,8 +4,6 @@ using UnityEngine;
 // using UnityEngine.UI;
 
 public class Bee : MonoBehaviour {
-
-	//Animation Variable
 	public Animator anim;
 
     public enum BodyState { Normal, Fat, Obese };
@@ -60,12 +58,16 @@ public class Bee : MonoBehaviour {
     }
 
     private void UpdateBodyState(BodyState newBodyState) {
-        switch(newBodyState)
+        BoxCollider2D beeBox = gameObject.GetComponent<BoxCollider2D>();
+
+        switch (newBodyState)
         {
             case BodyState.Normal:
-                currentBodyState = BodyState.Normal;
+                currentBodyState = BodyState.Normal;                               
                 break;
             case BodyState.Fat:
+                beeBox.size = beeBox.size * 2.0f;
+                // gameObject.GetComponent<BoxCollider2D>().offset = new Vector2((spriteSize.x / 2), 0);
                 currentBodyState = BodyState.Fat;
 				break;
             case BodyState.Obese:
