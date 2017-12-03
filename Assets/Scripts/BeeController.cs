@@ -11,8 +11,7 @@ public class BeeController : MonoBehaviour {
     private float fatGravityScale = 1.5f;
     private float obeseGravityScale = 2f;
 
-    public float flyForce = 5.0f;
-    public float flyTime = 0.05f;
+    public float flyForce = 5.0f;  // needs to beat gravity, TODO: calculate based on gravity?
 
     private Bee bee;
     private float minDistanceFromTop = 1.0f;
@@ -85,7 +84,7 @@ public class BeeController : MonoBehaviour {
             LookLeft();
         }
 
-        if (Input.GetKey(KeyCode.Space))  // Jump, now
+        if (Input.GetKeyDown(KeyCode.Space))  // Jump, now
         {
             if (onGround || onPlatform)
             {
@@ -128,7 +127,7 @@ public class BeeController : MonoBehaviour {
             LookLeft();
         }
 
-        if (Input.GetKey(KeyCode.Space))  // Jump, now
+        if (Input.GetKeyDown(KeyCode.Space))  // Jump, now
         {
             if (onPlatform)  // Can only Jump on platform if obese
             {
@@ -190,7 +189,7 @@ public class BeeController : MonoBehaviour {
             }
             else
             {
-                upForce += flyForce * Time.deltaTime;
+                upForce += flyForce * Time.fixedDeltaTime;
                 // upForce = Mathf.SmoothDamp()
                 // Mathf.Sqrt(JumpHeight * -2f * Gravity);
             }

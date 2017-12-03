@@ -29,6 +29,9 @@ public class BeeCollision : MonoBehaviour {
         else if (otherGameObject.tag == "Tree")
         {
             beeController.treeCollision = true;
+        } else if (otherGameObject.tag == "Leaf")
+        {
+            beeController.onPlatform = true;
         }
     }
 
@@ -38,6 +41,9 @@ public class BeeCollision : MonoBehaviour {
         if (otherGameObject.tag == "Tree")
         {
             beeController.treeCollision = false;
+        } else if (otherGameObject.tag == "Leaf")
+        {
+            beeController.onPlatform = false;
         }
     }
 }
