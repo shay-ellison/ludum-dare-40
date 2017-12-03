@@ -147,14 +147,10 @@ public class BeeController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-		if (flying)
+		if (!flying)
 		{
-			soundFX.PlayOneShot(wingFX, 5);
-		}
-		else
-		{
-			soundFX.Stop();
-		}
+            soundFX.Stop();
+        }
 
         switch (bee.getCurrentBodyState())
         {
@@ -177,6 +173,8 @@ public class BeeController : MonoBehaviour {
             if (!flying)  // initial burst when first hit space
             {
                 beeRigidbody.velocity = new Vector2(0.0f, 0.25f);
+                soundFX.loop = true;
+                soundFX.PlayOneShot(wingFX, 2);
             }
 
             upForce = flyForce * Time.fixedDeltaTime;            
