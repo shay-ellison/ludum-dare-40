@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Beehive : MonoBehaviour {
     public GameObject winTextObject;
@@ -26,9 +27,10 @@ public class Beehive : MonoBehaviour {
             Bee bee = otherGameObject.GetComponent<Bee>();
             if (bee.pollenCollected >= pollenNeeded)
             {
-                Debug.Log("YOU WIN!");
-                UnityEngine.UI.Text winText = winTextObject.GetComponent<UnityEngine.UI.Text>();
-                winText.text = "YOU WIN!";
+				SceneManager.LoadScene("WinScreen");
+                //Debug.Log("YOU WIN!");
+                //UnityEngine.UI.Text winText = winTextObject.GetComponent<UnityEngine.UI.Text>();
+                //winText.text = "YOU WIN!";
             }
         }
     }
