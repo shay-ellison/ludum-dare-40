@@ -8,18 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: f608fe26147f45348977d2e9ef33f826
-  - enabled: 0
-    path: Assets/Scenes/First.unity
-    guid: 53bb09f752a5fe94c943df25ac1f6c29
-  - enabled: 1
-    path: Assets/Scenes/WinScreen.unity
-    guid: 774aba00ce1c25747a710babd5aab75e
-  - enabled: 1
-    path: Assets/Scenes/LoseScreen.unity
-    guid: 77540fe3dc3466a4398cb2b0e250deb7
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 1de6802779d50e646adedbe9fef5a8e9
   - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: 1f59d762599ab8442b969ad9b580393a
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 774aba00ce1c25747a710babd5aab75e
+  - enabled: 1
+    path: Assets/Scenes/LoseScreen.unity
+    guid: 77540fe3dc3466a4398cb2b0e250deb7

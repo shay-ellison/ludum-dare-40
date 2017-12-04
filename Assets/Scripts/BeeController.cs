@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BeeController : MonoBehaviour {
-
-    public Camera mainCamera;
+	public Animator anim;
+	public Camera mainCamera;
     private Rigidbody2D beeRigidbody;
     private SpriteRenderer beeSpriteRenderer;
 
@@ -29,6 +29,8 @@ public class BeeController : MonoBehaviour {
     void Start() {
 		//initialize soundFX
 		soundFX = GetComponent<AudioSource>();
+
+		anim = GetComponent<Animator>();
 
 		if (mainCamera == null) {
             mainCamera = Camera.main;
@@ -236,6 +238,7 @@ public class BeeController : MonoBehaviour {
 
     private void LoseGame()
     {
-        SceneManager.LoadScene("LoseScreen");
+		anim.SetBool("Lose", true);
+		//SceneManager.LoadScene("LoseScreen");
     }
 }
