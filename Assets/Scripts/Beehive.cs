@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class Beehive : MonoBehaviour {
     // public GameObject winTextObject;
     // public GameObject pollenNeededDisplay;
+    public GameObject dialogueManager;
 
     public int pollenNeeded = 10;
     public string nextLevelName;
+
+    private int hiveAttempts = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -27,10 +30,31 @@ public class Beehive : MonoBehaviour {
 
         if (otherGameObject.tag == "Player")
         {
+            hiveAttempts++;
             Bee bee = otherGameObject.GetComponent<Bee>();
             if (bee.pollenCollected >= pollenNeeded)
             {
-				SceneManager.LoadScene(nextLevelName);
+                dialogueManager.GetComponent<DialogueManager>().ShowText("Nice job! Onto the next level...");
+				// SceneManager.LoadScene(nextLevelName);
+            } else
+            {
+                DialogueManager dm = dialogueManager.GetComponent<DialogueManager>();
+                if (hiveAttempts < 3)
+                {
+                    dm.ShowText(":) Hey!...." + pollenNeeded.ToString() + " please");
+                } else if (hiveAttempts < 5)
+                {
+                    dm.ShowText(":/ What are you trying to pull? " + pollenNeeded.ToString());
+                } else if (hiveAttempts < 8)
+                {
+                    dm.ShowText("-_- Listen, " + pollenNeeded.ToString() + "..." + pollenNeeded.ToString() + "!!!");
+                } else if (hiveAttempts < 10)
+                {
+                    dm.ShowText(":$ Might not let you in...");
+                } else
+                {
+                    bee.Die();
+                }
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
     public AudioClip deathExplosion;
+    public GameObject textBox;
 
     private AudioSource audioSource;
 
