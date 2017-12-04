@@ -11,7 +11,8 @@ public class BeeCollision : MonoBehaviour {
         bee = GetComponent<Bee>();
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other)
+    {
         GameObject otherGameObject = other.gameObject;
 
         if (otherGameObject.tag == "Flower")  // NOTE: A REAL TRIGGER! =)
@@ -19,6 +20,11 @@ public class BeeCollision : MonoBehaviour {
             Flower flower = otherGameObject.GetComponent<Flower>();
             bee.pollenCollected += flower.GimmePollen();
             // beeController.Bounce(bounceForce);
+        }
+        else if (otherGameObject.tag == "DeathFlower")
+        {
+            DeathFlower deathFlower = otherGameObject.GetComponent<DeathFlower>();
+            bee.deathPollenCollected += deathFlower.GimmeDeathPollen();            
         }
     }
 
@@ -32,15 +38,6 @@ public class BeeCollision : MonoBehaviour {
         else if (otherGameObject.tag == "Leaf")
         {
             beeController.onPlatform = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        GameObject otherGameObject = other.gameObject;
-        if (otherGameObject.tag == "Leaf")
-        {
-            beeController.onPlatform = false;
         }
     }
 

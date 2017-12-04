@@ -19,14 +19,17 @@ public class CameraFollow : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        float posX = Mathf.SmoothDamp(transform.position.x, bee.transform.position.x, ref velocity.x, smoothTimeX);
-        float posY = Mathf.SmoothDamp(transform.position.y, bee.transform.position.y, ref velocity.y, smoothTimeY);
+        if (bee != null)
+        {
+            float posX = Mathf.SmoothDamp(transform.position.x, bee.transform.position.x, ref velocity.x, smoothTimeX);
+            float posY = Mathf.SmoothDamp(transform.position.y, bee.transform.position.y, ref velocity.y, smoothTimeY);
 
-        transform.position = new Vector3(posX, posY, transform.position.z);
+            transform.position = new Vector3(posX, posY, transform.position.z);
 
-        // Camera Bounds
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minCameraPosition.x, maxCameraPosition.x),
-            Mathf.Clamp(transform.position.y, minCameraPosition.y, maxCameraPosition.y),
-            transform.position.z);   
+            // Camera Bounds
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, minCameraPosition.x, maxCameraPosition.x),
+                Mathf.Clamp(transform.position.y, minCameraPosition.y, maxCameraPosition.y),
+                transform.position.z);
+        }
     }
 }

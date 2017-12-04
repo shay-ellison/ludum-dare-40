@@ -8,11 +8,13 @@ public class Bee : MonoBehaviour {
 
     public enum BodyState { Normal, Fat, Obese };
     public int pollenCollected = 0;
+    public int deathPollenCollected = 0;
 
     private BeeDigitDisplay beeDigitDisplay;
 
     private int pollenToFat = 10;
     private int pollenToObese = 16;
+    private int deathPollenToDie = 10;
 
     private BodyState currentBodyState;
 
@@ -21,40 +23,49 @@ public class Bee : MonoBehaviour {
         return currentBodyState;
     }
 
-	// Use this for initialization
-	void Start () {
+    public void Die()
+    {
+        anim.SetBool("die", true);
+        //SceneManager.LoadScene("LoseScreen");
+    }
+
+    // Use this for initialization
+    void Start () {
 		anim = GetComponent<Animator>();
         beeDigitDisplay = GetComponent<BeeDigitDisplay>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        beeDigitDisplay.Show(pollenCollected);
+
+    // Update is called once per frame
+    void Update()
+    {               
+        beeDigitDisplay.Show(pollenCollected, deathPollenCollected);
+
+        if (deathPollenCollected >= deathPollenToDie)
+        {
+            Die();
+        }
 
         if (pollenCollected >= pollenToObese)
         {
             if (currentBodyState != BodyState.Obese)
             {
                 UpdateBodyState(BodyState.Obese);
-            }   
-        } else if (pollenCollected >= pollenToFat)
+            }
+        }
+        else if (pollenCollected >= pollenToFat)
         {
             if (currentBodyState != BodyState.Fat)
             {
                 UpdateBodyState(BodyState.Fat);
             }
-        } else
+        }
+        else
         {
             if (currentBodyState != BodyState.Normal)
             {
                 UpdateBodyState(BodyState.Normal);
             }
         }
-    }
-
-    private void displayPollenCollectedAsDigits()
-    {
-
     }
 
     private void UpdateBodyState(BodyState newBodyState) {

@@ -143,7 +143,7 @@ public class BeeController : MonoBehaviour {
                 onPlatform = false;
             } else if (onGround)
             {
-                LoseGame();
+                bee.Die();
             }
         }
 
@@ -234,11 +234,5 @@ public class BeeController : MonoBehaviour {
     {
         transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);  // flip it right
         // heading = 1;
-    }
-
-    private void LoseGame()
-    {
-		anim.SetBool("Lose", true);
-		//SceneManager.LoadScene("LoseScreen");
     }
 }
