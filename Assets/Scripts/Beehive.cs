@@ -8,6 +8,7 @@ public class Beehive : MonoBehaviour {
     // public GameObject pollenNeededDisplay;
 
     public int pollenNeeded = 10;
+    public string nextLevelName;
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +30,7 @@ public class Beehive : MonoBehaviour {
             Bee bee = otherGameObject.GetComponent<Bee>();
             if (bee.pollenCollected >= pollenNeeded)
             {
-				SceneManager.LoadScene("WinScreen");
-                //Debug.Log("YOU WIN!");
-                //UnityEngine.UI.Text winText = winTextObject.GetComponent<UnityEngine.UI.Text>();
-                //winText.text = "YOU WIN!";
+				SceneManager.LoadScene(nextLevelName);
             }
         }
     }

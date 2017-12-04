@@ -12,10 +12,13 @@ public class PushStartButton : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//change screen if start button is pressed
+        //change screen if start button is pressed
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
 		if (Input.GetMouseButtonDown(0))
 		{
-			SceneManager.LoadScene("First");
+            SceneManager.LoadScene("Level1");
 		}
 	}
 }
