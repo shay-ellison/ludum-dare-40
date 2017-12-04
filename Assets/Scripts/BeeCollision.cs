@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeeCollision : MonoBehaviour {
-    BeeController beeController;
-    Bee bee;
+    private BeeController beeController;
+    private Bee bee;
+    private BeeSoundPlayer soundPlayer;
 
     void Start() {
         beeController = GetComponent<BeeController>();
         bee = GetComponent<Bee>();
+        soundPlayer = GetComponent<BeeSoundPlayer>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherGameObject = other.gameObject;
 
-        if (otherGameObject.tag == "Flower")  // NOTE: A REAL TRIGGER! =)
-        {  // Will basically do this for any flower
+        if (otherGameObject.tag == "Flower")
+        {  
             Flower flower = otherGameObject.GetComponent<Flower>();
             bee.pollenCollected += flower.GimmePollen();
-            // beeController.Bounce(bounceForce);
+            soundPlayer.PlayGrabPollen();
         }
         else if (otherGameObject.tag == "DeathFlower")
         {
             DeathFlower deathFlower = otherGameObject.GetComponent<DeathFlower>();
-            bee.deathPollenCollected += deathFlower.GimmeDeathPollen();            
+            bee.deathPollenCollected += deathFlower.GimmeDeathPollen();
+            soundPlayer.PlayGrabDeathPollen();
         }
     }
 

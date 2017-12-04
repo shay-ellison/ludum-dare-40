@@ -32,7 +32,7 @@ public class DeathFlower : MonoBehaviour {
         deathPollens = new List<GameObject>();
 
         int numberPollens = totalDeathPollen / pollenPerGrab;
-        float radius = deathFlowerCollider.size.x / 2f;
+        float radius = deathFlowerCollider.size.x / 3f;
         Vector3 center = transform.TransformPoint(deathFlowerCollider.offset);
 
         for (int i = 0; i < numberPollens; i++)

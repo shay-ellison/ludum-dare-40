@@ -4,14 +4,15 @@ using UnityEngine;
 // using UnityEngine.UI;
 
 public class Bee : MonoBehaviour {
-	public Animator anim;
-
-    public enum BodyState { Normal, Fat, Obese };
+	public enum BodyState { Normal, Fat, Obese };
     public int pollenCollected = 0;
     public int deathPollenCollected = 0;
 
     private BeeDigitDisplay beeDigitDisplay;
+    private Animator animator;
+    private bool dying = false;  // Nothing else happens if you're dying
 
+    // Transitions
     private int pollenToFat = 10;
     private int pollenToObese = 16;
     private int deathPollenToDie = 10;
@@ -25,24 +26,31 @@ public class Bee : MonoBehaviour {
 
     public void Die()
     {
-        anim.SetBool("die", true);
-        //SceneManager.LoadScene("LoseScreen");
+        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().PlayDeathExplosion();
+        animator.SetBool("die", true);        
     }
 
     // Use this for initialization
     void Start () {
-		anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         beeDigitDisplay = GetComponent<BeeDigitDisplay>();
     }
 
     // Update is called once per frame
     void Update()
     {               
+        if (dying)
+        {
+            return;
+        }
+
         beeDigitDisplay.Show(pollenCollected, deathPollenCollected);
 
         if (deathPollenCollected >= deathPollenToDie)
         {
+            dying = true;
             Die();
+            return;
         }
 
         if (pollenCollected >= pollenToObese)
@@ -88,6 +96,6 @@ public class Bee : MonoBehaviour {
                 break;
         }
 		//the unity gui has a check for the pollencollected to determine sprite
-		anim.SetFloat("pollenCollected", pollenCollected);
+		animator.SetFloat("pollenCollected", pollenCollected);
 	}
 }

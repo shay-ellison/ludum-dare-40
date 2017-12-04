@@ -11,6 +11,7 @@ TagManager:
   - Boundary
   - Pollen
   - DeathFlower
+  - LevelController
   layers:
   - Default
   - TransparentFX

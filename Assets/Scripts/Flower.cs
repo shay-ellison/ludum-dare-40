@@ -31,7 +31,7 @@ public class Flower : MonoBehaviour {
         pollens = new List<GameObject>();
 
         int numberPollens = totalPollen / pollenPerGrab;
-        float radius = flowerCollider.size.x / 2f;
+        float radius = flowerCollider.size.x / 3f;
         Vector3 center = transform.TransformPoint(flowerCollider.offset);
   
         for (int i = 0; i < numberPollens; i++)

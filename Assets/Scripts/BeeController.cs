@@ -4,16 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BeeController : MonoBehaviour {
-	public Animator anim;
+	public Animator animator;
 	public Camera mainCamera;
-    private Rigidbody2D beeRigidbody;
-    private SpriteRenderer beeSpriteRenderer;
-
-	// For bee sound effects
-	public AudioClip wingFX;
-	private AudioSource soundFX;
-
-    private float flyForce = 1.0f;
+    public float gravityTransitionVelocity;
+    public float fatGravityScale = 2.5f;
 
     // Position/Collision Controls - TODO: whole system could be better :) -- Flags
     public bool flying = false;
@@ -21,26 +15,27 @@ public class BeeController : MonoBehaviour {
     public bool onPlatform = false;
     public bool jumping = false;
 
+    private Rigidbody2D beeRigidbody;
+    private SpriteRenderer beeSpriteRenderer;
+    private BeeSoundPlayer soundPlayer;
+    private float flyForce = 1.0f;
     private float currentSpeed = 0.0f;
-
-    private Bee bee;
+    private Bee bee;    
 
     // Use this for initialization
     void Start() {
-		//initialize soundFX
-		soundFX = GetComponent<AudioSource>();
-
-		anim = GetComponent<Animator>();
-
-		if (mainCamera == null) {
+        if (mainCamera == null)
+        {
             mainCamera = Camera.main;
         }
+
+        soundPlayer = GetComponent<BeeSoundPlayer>();
+		animator = GetComponent<Animator>();
 
         beeRigidbody = GetComponent<Rigidbody2D>();
         bee = GetComponent<Bee>();
     }
 
-    // Update is called once per frame
     void Update()
     {        
         switch (bee.getCurrentBodyState())
@@ -56,20 +51,17 @@ public class BeeController : MonoBehaviour {
         }
     }
 
-    public float gravityTransitionVelocity;
-    
-
     private void UpdateFat()
     {
         flying = false;  // definitely not flying now
 
         // SmoothDamp the gravity on transition from Bee 
-        if (beeRigidbody.gravityScale < 2.5f)
+        if (beeRigidbody.gravityScale < fatGravityScale)
         {
-            beeRigidbody.gravityScale = Mathf.SmoothDamp(beeRigidbody.gravityScale, 2.5f, ref gravityTransitionVelocity, 0.05f);
+            beeRigidbody.gravityScale = Mathf.SmoothDamp(beeRigidbody.gravityScale, fatGravityScale, ref gravityTransitionVelocity, 0.05f);
         } else
         {
-            beeRigidbody.gravityScale = 2.5f;
+            beeRigidbody.gravityScale = fatGravityScale;
         }        
         
         float jumpHeight = 12.0f;
@@ -104,17 +96,19 @@ public class BeeController : MonoBehaviour {
         Vector2 horizontalVector = new Vector2(currentSpeed, 0);
         beeRigidbody.position += horizontalVector;
 
+        // The antithesis of spacebar to jump, onGround or onPlatform will get set based upon a collision
         if (onGround || onPlatform)
         {
             jumping = false;
         }
     }
 
+    // TODO: This is basically just the UpdateFat() with some changes, could combine maybe?
     private void UpdateObese()
     {
         flying = false;
+        beeRigidbody.gravityScale = fatGravityScale;
 
-        beeRigidbody.gravityScale = 2.5f;
         float jumpHeight = 12.0f;
         float moveSpeed = 0.05f;
 
@@ -151,6 +145,7 @@ public class BeeController : MonoBehaviour {
         Vector2 horizontalVector = new Vector2(currentSpeed, 0);
         beeRigidbody.position += horizontalVector;
 
+        // The antithesis of spacebar to jump, onGround or onPlatform will get set based upon a collision
         if (onGround || onPlatform)
         {
             jumping = false;
@@ -160,7 +155,7 @@ public class BeeController : MonoBehaviour {
     void FixedUpdate() {
 		if (!flying)
 		{
-            soundFX.Stop();
+            soundPlayer.Stop();
         }
 
         switch (bee.getCurrentBodyState())
@@ -184,10 +179,7 @@ public class BeeController : MonoBehaviour {
             if (!flying)  // initial burst when first hit space
             {
                 beeRigidbody.velocity = new Vector2(0.0f, 0.25f);
-                soundFX.clip = wingFX;
-                soundFX.loop = true;
-                soundFX.volume = 0.75f;
-                soundFX.Play();
+                soundPlayer.PlayWingFlutter();
             }
 
             upForce = flyForce * Time.fixedDeltaTime;            

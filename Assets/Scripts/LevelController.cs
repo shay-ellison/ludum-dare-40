@@ -4,12 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
+    public AudioClip deathExplosion;
+
+    private AudioSource audioSource;
+
+    public void PlayDeathExplosion()
+    {
+        audioSource.PlayOneShot(deathExplosion, 1f);
+    }
 
 	// Use this for initialization
 	void Start () {
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
-        audio.PlayDelayed(44100);
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.volume = 0.1f;
+        audioSource.Play();
     }
 	
 	// Update is called once per frame
