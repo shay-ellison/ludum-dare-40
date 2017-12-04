@@ -31,28 +31,24 @@ public class Flower : MonoBehaviour {
         pollens = new List<GameObject>();
 
         int numberPollens = totalPollen / pollenPerGrab;
-        float radius = 0.25f;
+        float radius = flowerCollider.size.x / 2f;
         Vector3 center = transform.TransformPoint(flowerCollider.offset);
   
         for (int i = 0; i < numberPollens; i++)
         {
-            Vector3 pollenPosition = RandomCirclePoint(center, radius);
+            Vector3 pollenPosition = IndexCirclePoint(center, radius, i);
             pollens.Add(Instantiate(pollenPrefab, pollenPosition, Quaternion.identity, transform));
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    private Vector3 RandomCirclePoint(Vector3 center, float radius)
+    private Vector3 IndexCirclePoint(Vector3 center, float radius, int index)
     {
-        float ang = Random.value * 360;
-        Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.z = center.z;
+        int numberPollens = totalPollen / pollenPerGrab;
+        float angleRadians = Mathf.Deg2Rad * (360f / numberPollens) * index;
+        Vector3 pos = new Vector3(
+            center.x + radius * Mathf.Cos(angleRadians),
+            center.y + radius * Mathf.Sin(angleRadians),
+            center.z);
         return pos;
     }
 }

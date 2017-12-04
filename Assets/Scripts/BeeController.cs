@@ -9,7 +9,7 @@ public class BeeController : MonoBehaviour {
     private Rigidbody2D beeRigidbody;
     private SpriteRenderer beeSpriteRenderer;
 
-	//for bee sound effects
+	// For bee sound effects
 	public AudioClip wingFX;
 	private AudioSource soundFX;
 

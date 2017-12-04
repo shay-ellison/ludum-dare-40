@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour {
+public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +17,13 @@ public class GameController : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.R))  // Reset the Scene
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        } else if (Input.GetKey(KeyCode.Escape)) 
+        {
+            // switch to windowed
+            Screen.fullScreen = false;
+        } else if (Input.GetKey(KeyCode.F))
+        {
+            Screen.fullScreen = true;
         }
 	}
 }
