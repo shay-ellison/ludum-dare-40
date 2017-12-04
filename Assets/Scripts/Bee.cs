@@ -7,9 +7,9 @@ public class Bee : MonoBehaviour {
 	public Animator anim;
 
     public enum BodyState { Normal, Fat, Obese };
-    public GameObject pollenCollectedDisplay;
-
     public int pollenCollected = 0;
+
+    private BeeDigitDisplay beeDigitDisplay;
 
     private int pollenToFat = 10;
     private int pollenToObese = 16;
@@ -24,12 +24,12 @@ public class Bee : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
-	}
+        beeDigitDisplay = GetComponent<BeeDigitDisplay>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        UnityEngine.UI.Text collectedText = pollenCollectedDisplay.GetComponent<UnityEngine.UI.Text>();
-        collectedText.text = "Collected: " + pollenCollected.ToString();
+        beeDigitDisplay.Show(pollenCollected);
 
         if (pollenCollected >= pollenToObese)
         {
@@ -50,6 +50,11 @@ public class Bee : MonoBehaviour {
                 UpdateBodyState(BodyState.Normal);
             }
         }
+    }
+
+    private void displayPollenCollectedAsDigits()
+    {
+
     }
 
     private void UpdateBodyState(BodyState newBodyState) {

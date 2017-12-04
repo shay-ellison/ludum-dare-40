@@ -54,10 +54,21 @@ public class BeeController : MonoBehaviour {
         }
     }
 
+    public float gravityTransitionVelocity;
+    
+
     private void UpdateFat()
     {
+        flying = false;  // definitely not flying now
+
         // SmoothDamp the gravity on transition from Bee 
-        beeRigidbody.gravityScale = 2.5f; 
+        if (beeRigidbody.gravityScale < 2.5f)
+        {
+            beeRigidbody.gravityScale = Mathf.SmoothDamp(beeRigidbody.gravityScale, 2.5f, ref gravityTransitionVelocity, 0.05f);
+        } else
+        {
+            beeRigidbody.gravityScale = 2.5f;
+        }        
         
         float jumpHeight = 12.0f;
         float movementSpeed = 0.075f;
@@ -99,6 +110,8 @@ public class BeeController : MonoBehaviour {
 
     private void UpdateObese()
     {
+        flying = false;
+
         beeRigidbody.gravityScale = 2.5f;
         float jumpHeight = 12.0f;
         float moveSpeed = 0.05f;

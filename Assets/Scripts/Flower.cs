@@ -7,7 +7,7 @@ public class Flower : MonoBehaviour {
     public int totalPollen = 10;
 
     private BoxCollider2D flowerCollider;
-    private int pollenPerGrab = 2;  // always 2?
+    private int pollenPerGrab = 1;
     private List<GameObject> pollens;
 
     public int GimmePollen()
