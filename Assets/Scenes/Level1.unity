@@ -11171,6 +11171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70e9e7abb5c2aa4fa0b9c10fdc2e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   mainCamera: {fileID: 0}
   wingFX: {fileID: 8300000, guid: e67f1189fbdc7a945a11bd203eda28c4, type: 3}
   flying: 0
@@ -11430,8 +11431,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fbe762b019b10479daac22bc0a872d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testSprite: {fileID: 21300000, guid: 26de2fba83ec20f419967c261665b9fb, type: 3}
-  digits: []
+  digits:
+  - {fileID: 21300000, guid: d249477605f3a1245ba5ce6d2f42a06b, type: 3}
+  - {fileID: 21300000, guid: 18173b098d06ff3459353d3411da2fe3, type: 3}
+  - {fileID: 21300000, guid: eeb8a12a559f4e04fb5a1c80ef4a9906, type: 3}
+  - {fileID: 21300000, guid: cb2020afcc6b49b43801f52b29fc8a7d, type: 3}
+  - {fileID: 21300000, guid: 373d3df271337ad4f82c58c76bd3119c, type: 3}
+  - {fileID: 21300000, guid: 069892f8f5dcd954f87295ed45ed9610, type: 3}
+  - {fileID: 21300000, guid: 64a93b9ea017bdd49ab0a5213b10afeb, type: 3}
+  - {fileID: 21300000, guid: 420cd94f289e5c146be534d1a5c64ebc, type: 3}
+  - {fileID: 21300000, guid: 3dd3b2c5247dcd346bae82a174e1106c, type: 3}
+  - {fileID: 21300000, guid: 9c9e66171dd3d704eb3e87e53d2c2b6b, type: 3}
   pollenDigit100: {fileID: 1590449965}
   pollenDigit10: {fileID: 818539539}
   pollenDigit1: {fileID: 1286275059}

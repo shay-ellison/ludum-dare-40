@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class BeeDigitDisplay : MonoBehaviour {
-    public Sprite testSprite;
     public List<Sprite> digits;  // 0 - 9
 
     public GameObject pollenDigit100;
@@ -22,12 +20,7 @@ public class BeeDigitDisplay : MonoBehaviour {
 
     void Start()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            string digitPath = "Assets/Sprites/Labels/Digits/Digit" + i.ToString() + ".png";
-            Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(digitPath);
-            digits.Add(sprite);
-        }
+
     }
 
     private List<Sprite> NumberToDigitSprites(int number)
