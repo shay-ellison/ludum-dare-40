@@ -20,7 +20,7 @@ public class KillBee : StateMachineBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Destroy(player);
         GameObject dialogueManager = GameObject.Find("DialogueManager");
-        dialogueManager.GetComponent<DialogueManager>().ShowText("Press \"R\" to Retry.");
+        dialogueManager.GetComponent<DialogueManager>().ShowText("Press [R] to Retry.");
     }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

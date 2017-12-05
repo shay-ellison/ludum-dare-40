@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
         "StartScreen",
         "Level1",
         "Level2",
+        "Level3",
         "WinScreen"
     };
     private int currentSceneIndex = 0;

@@ -27,16 +27,16 @@ public class Beehive : MonoBehaviour {
             } else
             {
                 DialogueManager dm = dialogueManager.GetComponent<DialogueManager>();
-                if (hiveAttempts < 3)
+                if (hiveAttempts <= 2)
                 {
-                    dm.ShowText(":) Hey!...." + pollenNeeded.ToString() + " please");
-                } else if (hiveAttempts < 5)
+                    dm.ShowText(":) Hey!...." + pollenNeeded.ToString() + " please. Press [Enter].");
+                } else if (hiveAttempts == 3)
                 {
-                    dm.ShowText(":/ What are you trying to pull? " + pollenNeeded.ToString());
-                } else if (hiveAttempts < 8)
+                    dm.ShowText(":/ What are you trying to pull?");
+                } else if (hiveAttempts == 4)
                 {
                     dm.ShowText("-_- Listen, " + pollenNeeded.ToString() + "..." + pollenNeeded.ToString() + "!!!");
-                } else if (hiveAttempts < 10)
+                } else if (hiveAttempts == 5)
                 {
                     dm.ShowText(":$ Might not let you in...");
                 } else

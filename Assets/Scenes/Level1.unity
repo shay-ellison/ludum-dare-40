@@ -4665,6 +4665,11 @@ Prefab:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 986812288}
+    - target: {fileID: 114302335900418416, guid: 306d797ffa4ff994fa3885e5782757ee,
+        type: 2}
+      propertyPath: grabPollen
+      value: 
+      objectReference: {fileID: 8300000, guid: 4dce5b6bccb3ded488745279657a17b5, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 306d797ffa4ff994fa3885e5782757ee, type: 2}
   m_IsPrefabParent: 0
