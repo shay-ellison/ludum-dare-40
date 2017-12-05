@@ -7,10 +7,16 @@ public class Beehive : MonoBehaviour {
     // public GameObject winTextObject;
     // public GameObject pollenNeededDisplay;
     public GameObject dialogueManager;
-
     public int pollenNeeded = 10;
+    public AudioClip denySound;
 
+    private AudioSource audioSource;
     private int hiveAttempts = 0;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -27,6 +33,7 @@ public class Beehive : MonoBehaviour {
             } else
             {
                 DialogueManager dm = dialogueManager.GetComponent<DialogueManager>();
+                audioSource.PlayOneShot(denySound, 1f);
                 if (hiveAttempts <= 2)
                 {
                     dm.ShowText(":) Hey!...." + pollenNeeded.ToString() + " please. Press [Enter].");
