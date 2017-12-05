@@ -18,7 +18,7 @@ public class PushStartButton : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0))
 		{
-            SceneManager.LoadScene("Level1");
+            GameManager.instance.GoToNextScene();            
 		}
 	}
 }

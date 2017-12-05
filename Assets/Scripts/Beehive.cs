@@ -9,7 +9,6 @@ public class Beehive : MonoBehaviour {
     public GameObject dialogueManager;
 
     public int pollenNeeded = 10;
-    public string nextLevelName;
 
     private int hiveAttempts = 0;
 
@@ -35,7 +34,7 @@ public class Beehive : MonoBehaviour {
             if (bee.pollenCollected >= pollenNeeded)
             {
                 dialogueManager.GetComponent<DialogueManager>().ShowText("Nice job! Onto the next level...");
-				// SceneManager.LoadScene(nextLevelName);
+                GameManager.instance.GoToNextScene();
             } else
             {
                 DialogueManager dm = dialogueManager.GetComponent<DialogueManager>();

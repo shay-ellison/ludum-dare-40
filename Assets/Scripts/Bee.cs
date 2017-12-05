@@ -26,7 +26,7 @@ public class Bee : MonoBehaviour {
 
     public void Die()
     {
-        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelController>().PlayDeathExplosion();
+        GameObject.FindGameObjectWithTag("LevelController").GetComponent<LevelManager>().PlayDeathExplosion();
         animator.SetBool("die", true);        
     }
 

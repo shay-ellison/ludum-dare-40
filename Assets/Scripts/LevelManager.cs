@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelController : MonoBehaviour {
-    public AudioClip deathExplosion;
-    public GameObject textBox;
-
+public class LevelManager : MonoBehaviour {
     private AudioSource audioSource;
+    public AudioClip backgroundMusic;
+    public AudioClip deathExplosion;
 
     public void PlayDeathExplosion()
     {
@@ -17,6 +16,8 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         audioSource = GetComponent<AudioSource>();
+
+        audioSource.clip = backgroundMusic;
         audioSource.loop = true;
         audioSource.volume = 0.1f;
         audioSource.Play();
