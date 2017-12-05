@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour {
 
         audioSource.clip = backgroundMusic;
         audioSource.loop = true;
-        audioSource.volume = 0.1f;
+        audioSource.volume = 0.4f;
         audioSource.Play();
     }
 	

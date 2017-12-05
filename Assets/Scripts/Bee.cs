@@ -15,7 +15,7 @@ public class Bee : MonoBehaviour {
     // Transitions
     private int pollenToFat = 10;
     private int pollenToObese = 16;
-    private int deathPollenToDie = 10;
+    private int deathPollenToDie = 3;
 
     private BodyState currentBodyState;
 
