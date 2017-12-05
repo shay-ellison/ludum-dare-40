@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
 
+    public void OnScreenName(string name)
+    {
+        currentSceneIndex = scenes.IndexOf(name);
+    }
+
     void Awake()
     {
         if (instance == null)

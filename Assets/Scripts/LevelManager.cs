@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GameManager.instance.OnScreenName(SceneManager.GetActiveScene().name);
         audioSource = GetComponent<AudioSource>();
 
         audioSource.clip = backgroundMusic;
