@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
 
     public void PlayDeathExplosion()
     {
+        audioSource.Stop();
         audioSource.PlayOneShot(deathExplosion, 1f);
     }
 

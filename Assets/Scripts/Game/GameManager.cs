@@ -7,11 +7,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
-
-    private string startScreen = "StartScreen";
-    private string winScreen = "WinScreen";
-    private string loseScreen = "LoseScreen";
-
     private List<string> scenes = new List<string>
     {
         "StartScreen",

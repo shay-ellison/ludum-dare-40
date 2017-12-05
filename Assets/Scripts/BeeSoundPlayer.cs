@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BeeSoundPlayer : MonoBehaviour {
 
-    public AudioSource audioSource;
+    public AudioSource loopAudioSource;
+    public AudioSource oneTimeAudioSource;
 
     // Looped
     public AudioClip wingFlutter;
@@ -36,29 +37,31 @@ public class BeeSoundPlayer : MonoBehaviour {
 
     public void Stop()
     {
-        audioSource.Stop();
+        loopAudioSource.Stop();
     }
 
     // Use this for initialization
     void Start () {
-		if (audioSource == null)
+		if (loopAudioSource == null)
         {
-            audioSource = GetComponent<AudioSource>();
+            AudioSource[] audioSources = GetComponents<AudioSource>();
+            loopAudioSource = audioSources[0];
+            oneTimeAudioSource = audioSources[1];
         }
 	}
 
     private void PlayLoop(AudioClip audioClip)
     {
         Stop();
-        audioSource.clip = audioClip;
-        audioSource.loop = true;
-        audioSource.volume = 0.4f;
-        audioSource.Play();
+        loopAudioSource.clip = audioClip;
+        loopAudioSource.loop = true;
+        loopAudioSource.volume = 0.4f;
+        loopAudioSource.Play();
     }
 
     private void PlayOnce(AudioClip audioClip)
     {
         // Keep any looping track going, hopefully
-        audioSource.PlayOneShot(audioClip, 1f);                
+        oneTimeAudioSource.PlayOneShot(audioClip, 1f);                
     }
 }

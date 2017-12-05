@@ -19,8 +19,9 @@ public class KillBee : StateMachineBehaviour {
         // Actually Destroy the Bee Object 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Destroy(player);
-        // Bee bee = player.GetComponent<Bee>();        
-	}
+        GameObject dialogueManager = GameObject.Find("DialogueManager");
+        dialogueManager.GetComponent<DialogueManager>().ShowText("Press \"R\" to Retry.");
+    }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

@@ -20,14 +20,22 @@ public class BeeCollision : MonoBehaviour {
         if (otherGameObject.tag == "Flower")
         {  
             Flower flower = otherGameObject.GetComponent<Flower>();
-            bee.pollenCollected += flower.GimmePollen();
-            soundPlayer.PlayGrabPollen();
+            int pollen = flower.GimmePollen();
+            if (pollen > 0)
+            {
+                bee.pollenCollected += pollen;
+                soundPlayer.PlayGrabPollen();
+            }
         }
         else if (otherGameObject.tag == "DeathFlower")
         {
             DeathFlower deathFlower = otherGameObject.GetComponent<DeathFlower>();
-            bee.deathPollenCollected += deathFlower.GimmeDeathPollen();
-            soundPlayer.PlayGrabDeathPollen();
+            int deathPollen = deathFlower.GimmeDeathPollen();
+            if (deathPollen > 0)
+            {
+                bee.deathPollenCollected += deathPollen;
+                soundPlayer.PlayGrabDeathPollen();
+            }
         }
     }
 

@@ -12,17 +12,6 @@ public class Beehive : MonoBehaviour {
 
     private int hiveAttempts = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        // UnityEngine.UI.Text goalText = pollenNeededDisplay.GetComponent<UnityEngine.UI.Text>();
-        // goalText.text = "Need: " + pollenNeeded.ToString();
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherGameObject = other.gameObject;
@@ -33,7 +22,7 @@ public class Beehive : MonoBehaviour {
             Bee bee = otherGameObject.GetComponent<Bee>();
             if (bee.pollenCollected >= pollenNeeded)
             {
-                dialogueManager.GetComponent<DialogueManager>().ShowText("Nice job! Onto the next level...");
+                // dialogueManager.GetComponent<DialogueManager>().ShowLevelCompletionText("Nice job! Onto the next level...");
                 GameManager.instance.GoToNextScene();
             } else
             {

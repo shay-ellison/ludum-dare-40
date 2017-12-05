@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bee : MonoBehaviour {
 	public enum BodyState { Normal, Fat, Obese };
     public int pollenCollected = 0;
-    public int deathPollenCollected = 0;
+    public int deathPollenCollected = 0;    
 
     private BeeDigitDisplay beeDigitDisplay;
     private Animator animator;

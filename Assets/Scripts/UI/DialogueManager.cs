@@ -17,6 +17,11 @@ public class DialogueManager : MonoBehaviour {
         dialogueText.GetComponent<Text>().text = text;
     }
 
+    public void ShowLevelCompletionText(string text)
+    {
+        ShowText(text);
+    }
+
     public void EndText()
     {
         showingText = false;
